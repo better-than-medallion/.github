@@ -15,7 +15,7 @@ body:
     id: market
     attributes:
       label: Market and instruments
-      placeholder: "BTC and ETH perpetuals, 1-minute bars"
+      placeholder: "Instruments and bar size"
     validations:
       required: true
   - type: textarea

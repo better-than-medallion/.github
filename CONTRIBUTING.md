@@ -6,7 +6,7 @@ These rules apply to every repository of the organization unless the repository 
 
 1. Open or pick an issue first. Research ideas use the "Research idea" form, defects the "Bug" form.
 2. Branch from `main` with a short prefix: `feat/`, `fix/`, `research/`, `chore/`.
-3. Write commit messages and pull request titles in the [Conventional Commits](https://www.conventionalcommits.org/) style: `feat: add Kraken order book adapter`.
+3. Write commit messages and pull request titles in the [Conventional Commits](https://www.conventionalcommits.org/) style: `feat: add order book snapshot loader`.
 4. Open a pull request early as a draft and fill in the template.
 5. One approval from another member is required before merging. The author merges.
 
