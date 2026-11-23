@@ -1,0 +1,37 @@
+---
+name: Research idea
+description: A trading hypothesis to test, written down before the backtest.
+title: "research: "
+labels: ["research"]
+body:
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+      description: What market behaviour do you expect, and why would it exist? Who is on the other side of the trade?
+    validations:
+      required: true
+  - type: input
+    id: market
+    attributes:
+      label: Market and instruments
+      placeholder: "BTC and ETH perpetuals, 1-minute bars"
+    validations:
+      required: true
+  - type: textarea
+    id: test
+    attributes:
+      label: How to test it
+      description: Data needed, in-sample and out-of-sample periods, the metric that would prove it wrong.
+    validations:
+      required: true
+  - type: textarea
+    id: costs
+    attributes:
+      label: Costs to include
+      description: Fees, expected slippage, funding or borrow costs.
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Papers, books or threads that inspired the idea.

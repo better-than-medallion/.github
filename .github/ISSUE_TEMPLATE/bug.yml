@@ -1,0 +1,33 @@
+---
+name: Bug
+description: Something does not behave as expected.
+title: "fix: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Backtest
+        - Paper trading
+        - Live trading
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you expected, what happened instead, and since when.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: Commands, configuration and data range. Remove every key and account identifier.
+  - type: textarea
+    id: impact
+    attributes:
+      label: Money at risk
+      description: Open positions or orders affected. If live money is at risk, stop the bot first, then file this.
