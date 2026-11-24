@@ -22,15 +22,18 @@ os.makedirs(OUT, exist_ok=True)
 os.makedirs(PREVIEW, exist_ok=True)
 
 # ---------------------------------------------------------------- palette
-INK = "#0E1626"        # primary neutral, dark
-INK_2 = "#1A2438"      # raised surface on ink
-PAPER = "#F4F1EA"      # primary neutral, light
-PAPER_2 = "#E6E1D6"    # rule / surface on paper
-SLATE = "#6B7385"      # muted text, gridlines
-PERSIMMON = "#FF5A36"  # bid / up / our P&L (graphics)
-PERSIMMON_TXT = "#C2360F"  # persimmon for text on paper
-COBALT = "#2E44D6"     # ask / down / benchmark (on paper)
-COBALT_LT = "#8C9BFF"  # cobalt on ink
+INK = "#0A1214"        # primary neutral, dark
+INK_2 = "#152126"      # raised surface on ink
+PAPER = "#EEF0EA"      # primary neutral, light
+PAPER_2 = "#DCE1D8"    # rule / surface on paper
+SLATE = "#667479"      # gridlines, separators
+MUTED_LT = "#5A6467"   # secondary text on paper
+MUTED_DK = "#93A3A6"   # secondary text on ink
+AMBER = "#FF9F1C"      # bid / up / our P&L, on ink
+AMBER_DEEP = "#CC7000" # amber graphics on paper
+AMBER_TXT = "#9A5600"  # amber for text on paper
+TEAL = "#007385"       # ask / down / benchmark, on paper
+TEAL_LT = "#4FD0E0"    # teal on ink
 
 # ---------------------------------------------------------------- fonts
 ARCHIVO = os.path.join(FONTS, "Archivo%5Bwdth,wght%5D.ttf")
@@ -154,8 +157,8 @@ def tri(cx, cy, size, up=True):
 
 
 # ---------------------------------------------------------------- the mark
-# 64-unit grid. Medal disc + two ribbon tails (cobalt = benchmark side,
-# persimmon = our side). A persimmon equity curve starts under a dashed
+# 64-unit grid. Medal disc + two ribbon tails (teal = benchmark side,
+# amber = our side). An amber equity curve starts under a dashed
 # benchmark, dips, crosses it and breaks out through the medal's edge.
 
 CURVE = [(13, 34), (22, 27.5), (28.5, 31.5), (38, 19), (51, 8)]
@@ -164,20 +167,21 @@ CURVE = [(13, 34), (22, 27.5), (28.5, 31.5), (38, 19), (51, 8)]
 def mark_group(variant="light", tx=0, ty=0, scale=1.0):
     disc = INK if variant == "light" else PAPER
     dash = PAPER if variant == "light" else INK
-    left_tail = COBALT if variant == "light" else COBALT_LT
+    left_tail = TEAL if variant == "light" else TEAL_LT
+    ours = AMBER_DEEP if variant == "light" else AMBER
     cid = f"disc-{variant}-{int(tx)}-{int(ty)}"
     curve = poly(CURVE)
     ex, ey = CURVE[-1]
     return f"""<g transform="translate({tx} {ty}) scale({scale})">
   <defs><clipPath id="{cid}"><circle cx="32" cy="26" r="21"/></clipPath></defs>
   <path d="M17 34 L29.5 41 L24.5 63 L19.5 57.5 L12 61 Z" fill="{left_tail}"/>
-  <path d="M47 34 L34.5 41 L39.5 63 L44.5 57.5 L52 61 Z" fill="{PERSIMMON}"/>
+  <path d="M47 34 L34.5 41 L39.5 63 L44.5 57.5 L52 61 Z" fill="{ours}"/>
   <circle cx="32" cy="26" r="21" fill="{disc}"/>
   <g clip-path="url(#{cid})">
     <path d="M13.5 26.5 H50.5" stroke="{dash}" stroke-width="3.5" stroke-dasharray="5 3" stroke-opacity="0.55" fill="none"/>
   </g>
-  <path d="{curve}" stroke="{PERSIMMON}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <circle cx="{ex}" cy="{ey}" r="4.6" fill="{PERSIMMON}"/>
+  <path d="{curve}" stroke="{ours}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="{ex}" cy="{ey}" r="4.6" fill="{ours}"/>
 </g>"""
 
 
@@ -230,7 +234,8 @@ def chart(x0, y0, w, h, dark, seed, s, b, label=True, area=True):
     sp = to_points(s, x0, y0, w, h, lo, hi, step=2)
     bp = to_points(b, x0, y0, w, h, lo, hi, step=3)
     grid = SLATE
-    bench = COBALT_LT if dark else COBALT
+    bench = TEAL_LT if dark else TEAL
+    ours = AMBER if dark else AMBER_DEEP
     out = []
     for i in range(4):
         gy = y0 + h * i / 3
@@ -238,13 +243,13 @@ def chart(x0, y0, w, h, dark, seed, s, b, label=True, area=True):
     if area:
         gid = "fade-dark" if dark else "fade-light"
         out.append(f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1">'
-                   f'<stop offset="0" stop-color="{PERSIMMON}" stop-opacity="{0.30 if dark else 0.22}"/>'
-                   f'<stop offset="1" stop-color="{PERSIMMON}" stop-opacity="0"/></linearGradient></defs>')
+                   f'<stop offset="0" stop-color="{ours}" stop-opacity="{0.30 if dark else 0.22}"/>'
+                   f'<stop offset="1" stop-color="{ours}" stop-opacity="0"/></linearGradient></defs>')
         out.append(f'<path d="{poly(sp)} L{x0 + w} {y0 + h} L{x0} {y0 + h} Z" fill="url(#{gid})"/>')
     out.append(f'<path d="{poly(bp)}" stroke="{bench}" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round" fill="none"/>')
-    out.append(f'<path d="{poly(sp)}" stroke="{PERSIMMON}" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" fill="none"/>')
+    out.append(f'<path d="{poly(sp)}" stroke="{ours}" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" fill="none"/>')
     ex, ey = sp[-1]
-    out.append(f'<circle cx="{ex:.1f}" cy="{ey:.1f}" r="7" fill="{PERSIMMON}"/>')
+    out.append(f'<circle cx="{ex:.1f}" cy="{ey:.1f}" r="7" fill="{ours}"/>')
     bx, by = bp[-1]
     return "\n".join(out), (ex, ey), (bx, by)
 
@@ -253,9 +258,9 @@ def build_banner(dark):
     W, H = 1280, 320
     bg = INK if dark else PAPER
     fg = PAPER if dark else INK
-    muted = "#9AA3B5" if dark else "#555D6E"
-    bench_c = COBALT_LT if dark else COBALT
-    pers_txt = PERSIMMON if dark else PERSIMMON_TXT
+    muted = MUTED_DK if dark else MUTED_LT
+    bench_c = TEAL_LT if dark else TEAL
+    pers_txt = AMBER if dark else AMBER_TXT
     seed, s, b, dd = SERIES
     parts = []
     # mark
@@ -272,7 +277,7 @@ def build_banner(dark):
     # labels at line ends
     ret_s = (s[-1] - 1) * 100
     ret_b = (b[-1] - 1) * 100
-    parts.append(f'<path d="{tri(ex + 24, ey, 14, True)}" fill="{PERSIMMON}"/>')
+    parts.append(f'<path d="{tri(ex + 24, ey, 14, True)}" fill="{AMBER if dark else AMBER_DEEP}"/>')
     parts.append(f'<path d="{text_path(f"BTM +{ret_s:.0f}%", 20, ex + 36, ey + 7, font=MONO)}" fill="{pers_txt}"/>')
     parts.append(f'<path d="{text_path(f"BENCH +{ret_b:.0f}%", 20, bx + 18, by + 7, font=MONO)}" fill="{bench_c}"/>')
     parts.append(f'<path d="{text_path("BACKTEST · NOT ADVICE · DEFINITELY OVERFIT", 17, cx0, cy0 + ch + 42, font=MONO, tracking=0.03)}" fill="{muted}"/>')
@@ -294,7 +299,7 @@ def build_divider():
     parts = [f'<rect width="{W}" height="{H}" fill="{INK}"/>']
     x = margin
     for i, ((sym, up, val), w) in enumerate(zip(items, widths)):
-        col = PERSIMMON if up else COBALT_LT
+        col = AMBER if up else TEAL_LT
         parts.append(f'<path d="{text_path(sym, FS, x, 21.8, font=MONO, tracking=0.04)}" fill="{PAPER}"/>')
         tx = x + text_width(sym, FS, MONO, None, 0.04) + 10
         parts.append(f'<path d="{tri(tx + 6, 16, 11, up)}" fill="{col}"/>')
@@ -315,15 +320,15 @@ def build_social():
     parts = []
     c, (ex, ey), (bx, by) = chart(0, 372, W - 200, 268, True, seed, s, b)
     parts.append(c)
-    parts.append(f'<path d="{tri(ex + 26, ey, 16, True)}" fill="{PERSIMMON}"/>')
-    parts.append(f'<path d="{text_path(f"BTM +{(s[-1] - 1) * 100:.0f}%", 24, ex + 42, ey + 8, font=MONO)}" fill="{PERSIMMON}"/>')
-    parts.append(f'<path d="{text_path(f"BENCH +{(b[-1] - 1) * 100:.0f}%", 24, bx + 20, by + 8, font=MONO)}" fill="{COBALT_LT}"/>')
+    parts.append(f'<path d="{tri(ex + 26, ey, 16, True)}" fill="{AMBER}"/>')
+    parts.append(f'<path d="{text_path(f"BTM +{(s[-1] - 1) * 100:.0f}%", 24, ex + 42, ey + 8, font=MONO)}" fill="{AMBER}"/>')
+    parts.append(f'<path d="{text_path(f"BENCH +{(b[-1] - 1) * 100:.0f}%", 24, bx + 20, by + 8, font=MONO)}" fill="{TEAL_LT}"/>')
     parts.append(mark_group("dark", tx=88, ty=84, scale=3.2))
     tx = 88 + 64 * 3.2 + 44
     parts.append(f'<path d="{text_path("Better Than", 78, tx, 164, loc=DISPLAY, tracking=-0.01)}" fill="{PAPER}"/>')
     parts.append(f'<path d="{text_path("Medallion", 78, tx, 250, loc=DISPLAY, tracking=-0.01)}" fill="{PAPER}"/>')
-    parts.append(f'<path d="{text_path("Low latency, high hopes.", 34, tx, 318, font=SANS, loc=SANS_LOC)}" fill="#9AA3B5"/>')
-    parts.append(f'<path d="{text_path("github.com/better-than-medallion", 20, W - 64, 76, font=MONO, anchor="end")}" fill="#9AA3B5"/>')
+    parts.append(f'<path d="{text_path("Low latency, high hopes.", 34, tx, 318, font=SANS, loc=SANS_LOC)}" fill="{MUTED_DK}"/>')
+    parts.append(f'<path d="{text_path("github.com/better-than-medallion", 20, W - 64, 76, font=MONO, anchor="end")}" fill="{MUTED_DK}"/>')
     content = svg(W, H, "\n".join(parts), "Better Than Medallion", bg=INK)
     cairosvg.svg2png(bytestring=content.encode(), write_to=os.path.join(OUT, "social-preview.png"), output_width=W)
     with open(os.path.join(PREVIEW, "social-preview.svg"), "w") as fh:

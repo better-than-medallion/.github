@@ -13,8 +13,8 @@ The reference to that fund lives **only in our name**. We never use another firm
 A **medal with ribbon tails**, with our equity curve drawn across it:
 
 - A dashed line crosses the disc: the **benchmark**.
-- The persimmon **equity curve** starts below the benchmark, takes a drawdown, crosses the benchmark and **breaks out through the medal's edge**, ending on a filled dot (the last print).
-- The two **ribbon tails** carry the market pair: cobalt on the benchmark side, persimmon on ours.
+- The amber **equity curve** starts below the benchmark, takes a drawdown, crosses the benchmark and **breaks out through the medal's edge**, ending on a filled dot (the last print).
+- The two **ribbon tails** carry the market pair: teal on the benchmark side, amber on ours.
 
 The idea in one line: the medal is the benchmark, and the curve doesn't stay inside it. The breakout through the rim is what makes the mark recognisable, so it must never be cropped or contained.
 
@@ -33,42 +33,44 @@ All text in the SVGs is converted to paths, so they render identically on GitHub
 
 ## Palette
 
-The market pair is **persimmon and cobalt** instead of the usual red and green. The two can be told apart with every common form of colour blindness, and they don't look like a crypto exchange.
+The market pair is **amber and teal**, the colours of the phosphor screens on old trading-floor terminals, instead of the usual red and green. The two can be told apart with every common form of colour blindness, and they don't look like a crypto exchange. The palette is built for dark mode first: on paper, amber switches to a deeper shade.
 
-Convention in every chart and dashboard: **persimmon = up / bid / our P&L**, **cobalt = down / ask / benchmark**. Orange-red for "up" deliberately follows the East Asian market convention, and it keeps our own line in the warm hero colour.
+Convention in every chart and dashboard: **amber = up / bid / our P&L**, **teal = down / ask / benchmark**.
 
 | Token | Hex | Role |
 | --- | --- | --- |
-| Ink | `#0E1626` | Primary dark neutral: text on light, background on dark |
-| Ink 2 | `#1A2438` | Raised surfaces on ink (cards, code blocks) |
-| Paper | `#F4F1EA` | Primary light neutral: background on light, text on dark |
-| Paper 2 | `#E6E1D6` | Rules and surfaces on paper |
-| Slate | `#6B7385` | Gridlines, separators, secondary UI |
-| Persimmon | `#FF5A36` | Up / bid / our strategy. Graphics on both modes, text on ink |
-| Persimmon text | `#C2360F` | Persimmon for text on paper |
-| Cobalt | `#2E44D6` | Down / ask / benchmark on paper |
-| Cobalt light | `#8C9BFF` | Cobalt on ink |
-| Muted (light mode) | `#555D6E` | Secondary text on paper |
-| Muted (dark mode) | `#9AA3B5` | Secondary text on ink |
+| Ink | `#0A1214` | Primary dark neutral: text on light, background on dark |
+| Ink 2 | `#152126` | Raised surfaces on ink (cards, code blocks) |
+| Paper | `#EEF0EA` | Primary light neutral: background on light, text on dark |
+| Paper 2 | `#DCE1D8` | Rules and surfaces on paper |
+| Slate | `#667479` | Gridlines, separators, secondary UI |
+| Amber | `#FF9F1C` | Up / bid / our strategy on ink. Graphics and text |
+| Amber deep | `#CC7000` | Amber graphics on paper (logo, chart lines) |
+| Amber text | `#9A5600` | Amber for text on paper |
+| Teal | `#007385` | Down / ask / benchmark on paper |
+| Teal light | `#4FD0E0` | Teal on ink |
+| Muted (light mode) | `#5A6467` | Secondary text on paper |
+| Muted (dark mode) | `#93A3A6` | Secondary text on ink |
 
 ### Light and dark pairings (WCAG contrast)
 
 | Foreground | Background | Ratio | Use |
 | --- | --- | --- | --- |
-| Ink | Paper | 16.0 | Body text, light mode |
-| Muted light | Paper | 5.9 | Secondary text, light mode |
-| Cobalt | Paper | 6.4 | Benchmark lines, links, text |
-| Persimmon text | Paper | 4.9 | Persimmon text, light mode |
-| Persimmon | Paper | 2.8 | **Logo and decorative fills only, never text.** Chart lines on paper need a stroke of 3 px or more and a label next to them |
-| Paper | Ink | 16.0 | Body text, dark mode |
-| Muted dark | Ink | 7.1 | Secondary text, dark mode |
-| Persimmon | Ink | 5.8 | Text and graphics, dark mode |
-| Cobalt light | Ink | 7.1 | Benchmark lines and text, dark mode |
-| Cobalt | Ink | 2.5 | **Do not use**: switch to cobalt light |
-| Paper | Cobalt | 6.4 | Buttons and badges on cobalt |
-| Ink | Persimmon | 5.8 | Buttons and badges on persimmon |
+| Ink | Paper | 16.5 | Body text, light mode |
+| Muted light | Paper | 5.3 | Secondary text, light mode |
+| Teal | Paper | 4.8 | Benchmark lines, links, text |
+| Amber text | Paper | 4.9 | Amber text, light mode |
+| Amber deep | Paper | 3.1 | **Graphics only, never text.** Logo, chart lines with a label next to them |
+| Amber | Paper | 1.8 | **Do not use**: switch to amber deep or amber text |
+| Paper | Ink | 16.5 | Body text, dark mode |
+| Muted dark | Ink | 7.2 | Secondary text, dark mode |
+| Amber | Ink | 9.2 | Text and graphics, dark mode |
+| Teal light | Ink | 10.3 | Benchmark lines and text, dark mode |
+| Teal | Ink | 3.4 | **Not for text**: switch to teal light |
+| Paper | Teal | 4.8 | Buttons and badges on teal |
+| Ink | Amber | 9.2 | Buttons and badges on amber |
 
-Use solid fills. The only gradient allowed is a vertical persimmon fade under an equity curve (30 % to 0 % on ink, 22 % to 0 % on paper).
+Use solid fills. The only gradient allowed is a vertical amber fade under an equity curve (30 % to 0 % on ink, 22 % to 0 % on paper).
 
 ## Typography
 
@@ -114,14 +116,14 @@ Between sections:
 - Draw every chart from a seeded random walk with drift, a visible drawdown and a dashed benchmark. Our charts must look plausible, never like a straight line.
 - Label every performance figure as a backtest, simulated, or live, and say which.
 - Use invented tickers only (`BTM`, `SHARPE`, `ALPHA`, `OVERFIT`).
-- Keep persimmon for our line and cobalt for the benchmark, everywhere.
+- Keep amber for our line and teal for the benchmark, everywhere.
 
 ## Don't
 
 - Don't use the name, logo, colours or typography of any real fund or firm, and don't imply any affiliation.
 - Don't recolour the mark, swap the tails, or put the curve inside the disc. The breakout is the mark.
 - Don't use red/green for up/down, purple-to-blue gradients, neon green on black, or emoji in place of icons.
-- Don't use bright persimmon for text on paper: use persimmon text (`#C2360F`).
+- Don't use bright amber on paper: use amber deep (`#CC7000`) for graphics and amber text (`#9A5600`) for text.
 - Don't add bevels, glows, shadows, gold foil or 3D medals.
 - Don't show real tickers, real positions or real P&L in brand material.
 - Don't promise returns. The joke is the name, not the risk disclosure.

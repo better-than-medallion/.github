@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Better Than Medallion mark"><title>Better Than Medallion mark</title><g transform="translate(0 0) scale(1.0)">
   <defs><clipPath id="disc-light-0-0"><circle cx="32" cy="26" r="21"/></clipPath></defs>
-  <path d="M17 34 L29.5 41 L24.5 63 L19.5 57.5 L12 61 Z" fill="#2E44D6"/>
-  <path d="M47 34 L34.5 41 L39.5 63 L44.5 57.5 L52 61 Z" fill="#FF5A36"/>
-  <circle cx="32" cy="26" r="21" fill="#0E1626"/>
+  <path d="M17 34 L29.5 41 L24.5 63 L19.5 57.5 L12 61 Z" fill="#007385"/>
+  <path d="M47 34 L34.5 41 L39.5 63 L44.5 57.5 L52 61 Z" fill="#CC7000"/>
+  <circle cx="32" cy="26" r="21" fill="#0A1214"/>
   <g clip-path="url(#disc-light-0-0)">
-    <path d="M13.5 26.5 H50.5" stroke="#F4F1EA" stroke-width="3.5" stroke-dasharray="5 3" stroke-opacity="0.55" fill="none"/>
+    <path d="M13.5 26.5 H50.5" stroke="#EEF0EA" stroke-width="3.5" stroke-dasharray="5 3" stroke-opacity="0.55" fill="none"/>
   </g>
-  <path d="M13.0 34.0 L22.0 27.5 L28.5 31.5 L38.0 19.0 L51.0 8.0" stroke="#FF5A36" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <circle cx="51" cy="8" r="4.6" fill="#FF5A36"/>
+  <path d="M13.0 34.0 L22.0 27.5 L28.5 31.5 L38.0 19.0 L51.0 8.0" stroke="#CC7000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="51" cy="8" r="4.6" fill="#CC7000"/>
 </g></svg>
